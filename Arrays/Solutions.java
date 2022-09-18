@@ -1,15 +1,24 @@
 public class Solutions {
 
-    long maxSubarraySum(int arr[], int n){
+    public static void merge(long arr1[], long arr2[], int n, int m) 
+    {
+        int i=0, j=0;
         
-        long sum=arr[0], res = arr[0];
-        
-        for(int i=1; i<n; i++) {
+        while(i<n && j<m) {
             
-            sum = Math.max(sum+ (long)arr[i], (long)arr[i]);
-            res = Math.max(res, sum);
+            if(arr1[i] <= arr2[j]) {
+                i++;
+            } else {
+                long key = arr2[j];
+                int k = j+1;
+                
+                while(k<m && arr2[k]<arr1[i]) {
+                    arr2[k-1] = arr2[k];
+                    k++;
+                }
+                arr2[k-1] = arr1[i];
+                arr1[i] = key;
+            }
         }
-        
-        return res;
     }
 }
